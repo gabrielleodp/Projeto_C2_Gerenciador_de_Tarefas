@@ -31,7 +31,7 @@ cd task-manager-api
 npm install
 
 # 3. Copie o arquivo de variáveis de ambiente
-cp .env.example .env
+copy .env.example .env
 # Edite o .env e defina um JWT_SECRET seguro
 
 # 4. Execute as migrations e gere o cliente Prisma
