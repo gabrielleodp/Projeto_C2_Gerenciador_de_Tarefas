@@ -1,0 +1,150 @@
+### Task Manager API — Exemplos de requisições
+### Importe no VS Code com a extensão REST Client, ou use como referência
+
+@base = http://localhost:3000
+@token = COLE_SEU_TOKEN_AQUI
+@projetoId = COLE_ID_DO_PROJETO_AQUI
+@tarefaId = COLE_ID_DA_TAREFA_AQUI
+
+# ─────────────────────────────────────────
+# AUTH
+# ─────────────────────────────────────────
+
+### Registrar novo usuário
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao@email.com",
+  "senha": "senha123"
+}
+
+###
+
+### Login
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "joao@email.com",
+  "senha": "senha123"
+}
+
+###
+
+### Dados do usuário autenticado
+GET {{base}}/auth/me
+Authorization: Bearer {{token}}
+
+###
+
+# ─────────────────────────────────────────
+# PROJETOS
+# ─────────────────────────────────────────
+
+### Listar projetos
+GET {{base}}/projetos
+Authorization: Bearer {{token}}
+
+###
+
+### Criar projeto
+POST {{base}}/projetos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nome": "Projeto TCC",
+  "descricao": "Organizar todas as etapas do TCC"
+}
+
+###
+
+### Buscar projeto por ID (com tarefas)
+GET {{base}}/projetos/{{projetoId}}
+Authorization: Bearer {{token}}
+
+###
+
+### Atualizar projeto
+PUT {{base}}/projetos/{{projetoId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nome": "Projeto TCC — Atualizado"
+}
+
+###
+
+### Deletar projeto
+DELETE {{base}}/projetos/{{projetoId}}
+Authorization: Bearer {{token}}
+
+###
+
+# ─────────────────────────────────────────
+# TAREFAS
+# ─────────────────────────────────────────
+
+### Listar tarefas (com filtros)
+GET {{base}}/tarefas?prioridade=alta&status=aberta&page=1&limit=10
+Authorization: Bearer {{token}}
+
+###
+
+### Criar tarefa
+POST {{base}}/tarefas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "titulo": "Escrever a introdução",
+  "descricao": "Capítulo 1 do TCC",
+  "projetoId": "{{projetoId}}",
+  "prioridade": "alta",
+  "dataPrevista": "2025-07-01T00:00:00.000Z"
+}
+
+###
+
+### Buscar tarefa por ID
+GET {{base}}/tarefas/{{tarefaId}}
+Authorization: Bearer {{token}}
+
+###
+
+### Atualizar tarefa
+PUT {{base}}/tarefas/{{tarefaId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "status": "em_andamento",
+  "prioridade": "media"
+}
+
+###
+
+### Deletar tarefa (soft delete)
+DELETE {{base}}/tarefas/{{tarefaId}}
+Authorization: Bearer {{token}}
+
+###
+
+# ─────────────────────────────────────────
+# ADMIN
+# ─────────────────────────────────────────
+
+### Listar todos os usuários (somente ADMIN)
+GET {{base}}/users
+Authorization: Bearer {{token}}
+
+###
+
+### Buscar usuário por ID (somente ADMIN)
+GET {{base}}/users/ID_DO_USUARIO
+Authorization: Bearer {{token}}
+
+###
