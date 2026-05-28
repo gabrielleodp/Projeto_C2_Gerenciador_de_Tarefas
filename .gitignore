@@ -1,0 +1,19 @@
+node_modules/
+dist/
+
+# Variáveis de ambiente — NUNCA commitar
+.env
+.env.local
+.env.*.local
+
+# Bancos de dados locais
+prisma/*.db
+prisma/*.db-journal
+
+# Cobertura de testes
+coverage/
+
+# Editor
+.vscode/
+.idea/
+*.swp
